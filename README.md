@@ -29,11 +29,23 @@ npm start
 **iOS Simulator (Mac only):**
 ```bash
 npm run ios
+
+//or 
+
+1. npm start
+
+2. select i
 ```
 
 **Android Emulator:**
 ```bash
 npm run android
+
+//or 
+
+1. npm start
+
+2. select a
 ```
 
 ## What You'll See
@@ -59,12 +71,13 @@ npm run lint
 
 ```
 src/
-├── components/     # UI components (PostCard, LoadingSpinner, etc.)
-├── hooks/          # Custom hooks (usePosts)
-├── screens/        # App screens (PostListScreen)
-├── services/       # API calls (JSONPlaceholder)
-├── types/          # TypeScript types
-└── styles/         # Shared styling
+├── components/     
+├── constants/     
+├── hooks/          
+├── screens/        
+├── services/       
+├── styles/          
+└── types/         
 ```
 
 ## Technologies Used
