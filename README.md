@@ -1,4 +1,4 @@
-# React Native Blog App
+# Simple Blog App
 
 A simple React Native app that displays blog posts from JSONPlaceholder API. Built with TypeScript and Expo.
 
@@ -12,8 +12,8 @@ A simple React Native app that displays blog posts from JSONPlaceholder API. Bui
 
 ```bash
 # Clone and install
-git clone <your-repo-url>
-cd react-native-blog-app
+git clone https://github.com/lordrhaegar/Blogap.git
+cd Blogap
 npm install
 
 # Start the app
@@ -69,7 +69,7 @@ src/
 
 ## Technologies Used
 
-- React Native with Expo SDK 53
+- React Native with Expo SDK 51
 - TypeScript
 - JSONPlaceholder API
 - Jest for testing
@@ -96,5 +96,3 @@ Fetches data from:
 - Users: `https://jsonplaceholder.typicode.com/users`
 
 ---
-
-*For detailed setup guides and troubleshooting, see the [Expo documentation](https://docs.expo.dev/).*
