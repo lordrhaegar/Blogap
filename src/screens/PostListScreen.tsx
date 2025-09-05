@@ -62,6 +62,7 @@ export const PostListScreen: React.FC = () => {
           data={posts}
           renderItem={renderPost}
           keyExtractor={keyExtractor}
+          contentContainerStyle={styles.listContainer}
           testID="posts-flatlist"
           refreshControl={
             <RefreshControl
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContainer: {
-    paddingVertical: Spacing.lg,
+    paddingVertical: Spacing.xl,
     flexGrow: 1,
   },
   separator: {

@@ -124,6 +124,7 @@ export const Shadows = StyleSheet.create({
 // Common layout styles
 export const Layout = StyleSheet.create({
   container: {
+    paddingTop: 10,
     flex: 1,
     backgroundColor: Colors.background,
   },
