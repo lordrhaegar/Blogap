@@ -1,4 +1,3 @@
-// Basic setup most teams use
 module.exports = {
   extends: [
     'eslint:recommended',
