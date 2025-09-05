@@ -1,19 +1,38 @@
+/**
+ * @fileoverview This is the PostCard component that displays a preview of each blog post as a card.
+ * The card shows the post title, a trncated post body, and the author's name.
+ * @module components/PostCard
+ */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { BorderRadius, Colors, Shadows, Spacing, TextStyles } from '../styles/global';
 import { PostCardProps } from '../types';
 
-    /**
-     * Single post card component for blog post with title, body preview and author name
-     * Cuts off the post body if greater than the preview length with ellipses
-     * Cuts off at the last completed word before the preview length
-     */
+/**
+* Single post card component that displays a blog post with title, body preview, and author name.
+* Intelligently truncates the post body if it exceeds the preview length, cutting off at the 
+* last complete word before the limit and adding ellipses.
+* 
+* @component
+* @param {PostCardProps} props - Component props
+* @param {PostWithAuthor} props.post - The blog post data to display
+* @param {string} [props.testID='post-card'] - Test id for testing
+* @returns {React.ReactElement} The PostCard component
+* */
 
-    export const PostCard: React.FC<PostCardProps> = (
+export const PostCard: React.FC<PostCardProps> = (
     {
         post,
         testID = 'post-card'
     }) => {
+/**
+   * Truncates the post body text to a maximum of 150 characters while preserving word boundaries.
+   * If the text is longer than 150 characters, it finds the last complete word before the limit
+   * and adds ellipses. If the text is shorter, it returns the original text untruncated.
+   * 
+   * @param {string} body - The body of a blog post
+   * @returns {string} Truncated body with conditional ellipses
+   * */
 
     const getTruncatedBody = (body: string): string => {
         if (body.length <= 150) {
@@ -67,7 +86,10 @@ import { PostCardProps } from '../types';
         </View>
     );
 };
-
+/**
+ * Stylesheet for the PostCard component.
+ * @type {Object}
+ */
 const styles = StyleSheet.create({
     container: {
         backgroundColor: Colors.white,

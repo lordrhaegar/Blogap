@@ -1,9 +1,12 @@
-// Basic setup most teams use
 module.exports = {
+    env: {
+    node: true,
+  },
+    // parser: '@typescript-eslint/parser',
   extends: [
     'eslint:recommended',
-    '@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
+    '',
+    'plugin:@typescript-eslint/recommended',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',

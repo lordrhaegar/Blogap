@@ -52,7 +52,8 @@ npm run android
 
 - List of blog posts with titles, previews, and authors
 - Pull the list down to execute the Pull-toRefresh feature to refresh the list
-- Loading and error states if fetching the blog post fails
+- Initial loading screen and error states if fetching the blog post fails
+- Retry button if fetching the blog post fails
 
 ## Development
 

@@ -1,27 +1,35 @@
+/**
+ * @fileoverview API service module for fetching blog posts and user data.
+ * Provides functions to interact with the JSONPlaceholder API with error handling and timeout support.
+ * @module services/api
+ */
 import {API_ENDPOINTS } from '../constants/api';
 import { Post, PostWithAuthor, User } from '../types';
 
 /**
- * A fetch wrapper with a timeout functionality that checks for and handles all error cases gracefully to prevent crashes
- * Runs a get request to fetch data from url
- * @param url the API Endpoint
- * @param options configuration object that tells the fetch() function HOW to make the HTTP request
- * @param timeout time after which the PI call will stop
- */
-// 
+ * A fetch wrapper with timeout functionality that handles all error cases gracefully.
+ * Performs a GET request to fetch data from the specified URL with cancellation support.
+ * 
+ * @template T - The expected return type of the API response
+ * @param {string} url - The API endpoint URL to fetch from
+ * @param {number} [timeout=10000] - Timeout duration in milliseconds (default: 10 seconds)
+ * @returns {Promise<T>} Promise that resolves to the parsed JSON response
+ * @throws {Error} Throws error for network failures, timeouts, or HTTP errors
+ */ 
 async function fetchWithTimeout<T>(
   url: string,
   timeout = 10000
 ): Promise<T> {
+    
     /**
-     * Remote controller for the API request that cancels the request if 
-     * It takes more than defined timeout.
-     * If user pulls refresh while old request is still loading 
-     */
+   * AbortController for the API request that cancels the request if 
+   * it takes longer than the defined timeout.
+   * Useful when user pulls to refresh while old request is still loading.
+   */
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-// fetch request with signal that makes the method cancellable on meeting cancel criteria
+// Fetch request with signal that makes the method cancellable on meeting cancel criteria
   try {
     const response = await fetch(url, {
       signal: controller.signal,
@@ -48,8 +56,10 @@ async function fetchWithTimeout<T>(
 }
 
 /**
- * Makes a get request to post API Endpoint
- * @returns a list with all blog posts
+ * Fetches all blog posts from the JSONPlaceholder API.
+ * 
+ * @returns {Promise<Post[]>} Promise that resolves to an array of blog posts
+ * @throws {Error} Throws error if the API request fails
  */
 export async function fetchPosts(): Promise<Post[]> {
   try {
@@ -62,8 +72,10 @@ export async function fetchPosts(): Promise<Post[]> {
 }
 
 /**
- * Makes a get request to user API Endpoint
- * @returns a list of all users
+ * Fetches all users from the JSONPlaceholder API.
+ * 
+ * @returns {Promise<User[]>} Promise that resolves to an array of users
+ * @throws {Error} Throws error if the API request fails
  */
 export async function fetchUsers(): Promise<User[]> {
   try {
@@ -76,18 +88,21 @@ export async function fetchUsers(): Promise<User[]> {
 }
 
 /**
- * @param users list of users fetched from user API Endpoint
- * @returns a map having a key, value pair of user ID and user name
+ * Creates a lookup map from an array of users for efficient author name resolution.
+ * 
+ * @param {User[]} users - Array of users to create lookup map from
+ * @returns {Map<number, string>} Map with user ID as key and user name as value
  */
 function createUserLookup(users: User[]): Map<number, string> {
   return new Map(users.map(user => [user.id, user.name]));
 }
 
 /**
- * Combines posts with their corresponding author names
- * @param posts list of posts fetched from post API Endpoint
- * @param userLookup a key, value map of user ID and user name
- * @returns a list of posts with user names as authorName
+ * Combines blog posts with their corresponding author names using a user lookup map.
+ * 
+ * @param {Post[]} posts - Array of blog posts to enhance with author information
+ * @param {Map<number, string>} userLookup - Map containing user ID to name mappings
+ * @returns {PostWithAuthor[]} Array of posts enhanced with author names
  */
 function mergePostsWithAuthors(posts: Post[], userLookup: Map<number, string>): PostWithAuthor[] {
   return posts.map(post => ({
@@ -97,12 +112,14 @@ function mergePostsWithAuthors(posts: Post[], userLookup: Map<number, string>): 
 }
 
 /**
- * The main function used in the UI to fetch posts and users then combines them to include author names
- * @returns a list of posts with their authors
+ * Main function used in the UI to fetch posts and users, then combines them to include author names.
+ * Fetches posts and users concurrently for optimal performance, then merges the data.
+ * 
+ * @returns {Promise<PostWithAuthor[]>} Promise that resolves to an array of posts with author information
+ * @throws {Error} Throws error if either the posts or users API request fails
  */
 export async function fetchPostsWithAuthors(): Promise<PostWithAuthor[]> {
   try {
-    // Fetch posts and users concurrently for better performance
     const [posts, users] = await Promise.all([
       fetchPosts(),
       fetchUsers(),

@@ -1,12 +1,25 @@
+/**
+ * @fileoverview Error message component with retry button.
+ * Displays friendly error messages and a button to retry fetching data.
+ * @module components/ErrorMessage
+ */
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BorderRadius, Colors, Spacing, TextStyles, Typography } from '../styles/global';
 import { ErrorMessageProps } from '../types';
 
 /**
- * Component for Error message with a retry feature in the case of network failure
- */
- 
+ * Reusable error message component that displays error information with optional retry functionality.
+ * Shows an error icon, message text, and conditionally renders a retry button.
+ * Designed for network failures and other recoverable errors.
+ * 
+ * @component
+ * @param {ErrorMessageProps} props - Component props
+ * @param {string} props.message - The error message to display on screen
+ * @param {Function} [props.onRetry] - Optional callback function for retry functionality
+ * @param {string} [props.testID='error-message'] - Testid for testing 
+ * @returns {React.ReactElement} The ErrorMessage component
+ * */
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({
   message,
   onRetry,
@@ -45,6 +58,10 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
     </View>
   );
 };
+/**
+ * Stylesheet for the ErrorMessage component.
+ * @type {Object}
+ */
 
 const styles = StyleSheet.create({
   container: {
