@@ -30,7 +30,7 @@ npm start
 ```bash
 npm run ios
 
-//or 
+# or 
 
 1. npm start
 
@@ -41,7 +41,7 @@ npm run ios
 ```bash
 npm run android
 
-//or 
+# or 
 
 1. npm start
 

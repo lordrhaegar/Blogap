@@ -29,10 +29,14 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
     <View 
       style={styles.container}
       testID={testID}
+      accessible={true}
+      accessibilityRole="alert"
+      accessibilityLabel={`Error: ${message}`}
     >
       <Text 
         style={styles.icon}
         testID={`${testID}-icon`}
+        accessibilityLabel="Error icon"
       >
         ⚠️
       </Text>
@@ -40,6 +44,8 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
       <Text 
         style={styles.message}
         testID={`${testID}-text`}
+        accessible={true}
+        accessibilityRole="text"
       >
         {message}
       </Text>
@@ -50,6 +56,9 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
           onPress={onRetry}
           testID={`${testID}-retry-button`}
           accessibilityLabel="Try again"
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityHint="Double tap to try loading the content again"
           activeOpacity={0.7}
         >
           <Text style={styles.retryButtonText}>Try Again</Text>

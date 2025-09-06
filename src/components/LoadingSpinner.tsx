@@ -21,27 +21,31 @@ import { LoadingSpinnerProps } from '../types';
  * @returns {React.ReactElement} The LoadingSpinner component
  * */
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
-  size = 'large',
-  color = Colors.primary,
-  testID = 'loading-spinner',
+    size = 'large',
+    color = Colors.primary,
+    testID = 'loading-spinner',
 }) => {
-  return (
-    <View 
-      style={styles.container}
-      testID={testID}
-    >
-      <ActivityIndicator 
-        size={size} 
-        color={color}
-        testID={`${testID}-indicator`}
-      />
-    </View>
-  );
+    return (
+        <View
+            style={styles.container}
+            testID={testID}
+        >
+            <ActivityIndicator
+                size={size}
+                color={color}
+                testID={`${testID}-indicator`}
+                accessible={true}
+                accessibilityRole="progressbar"
+                accessibilityLabel="Loading content"
+                accessibilityHint="Please wait while the content loads"
+            />
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    ...Layout.centerContent,
-    padding: Spacing.xl,
-  },
+    container: {
+        ...Layout.centerContent,
+        padding: Spacing.xl,
+    },
 });

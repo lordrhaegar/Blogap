@@ -25,14 +25,14 @@ export const PostCard: React.FC<PostCardProps> = (
         post,
         testID = 'post-card'
     }) => {
-/**
-   * Truncates the post body text to a maximum of 150 characters while preserving word boundaries.
-   * If the text is longer than 150 characters, it finds the last complete word before the limit
-   * and adds ellipses. If the text is shorter, it returns the original text untruncated.
-   * 
-   * @param {string} body - The body of a blog post
-   * @returns {string} Truncated body with conditional ellipses
-   * */
+    /**
+       * Truncates the post body text to a maximum of 150 characters while preserving word boundaries.
+       * If the text is longer than 150 characters, it finds the last complete word before the limit
+       * and adds ellipses. If the text is shorter, it returns the original text untruncated.
+       * 
+       * @param {string} body - The body of a blog post
+       * @returns {string} Truncated body with conditional ellipses
+       * */
 
     const getTruncatedBody = (body: string): string => {
         if (body.length <= 150) {
@@ -53,11 +53,17 @@ export const PostCard: React.FC<PostCardProps> = (
         <View
             style={styles.container}
             testID={testID}
+            accessible={true}
+            accessibilityRole="article"
+            accessibilityLabel={`Blog post: ${post.title} by ${post.authorName}`}
+
         >
             <Text
                 style={styles.title}
                 testID={`${testID}-title`}
                 numberOfLines={2}
+                accessible={true}
+                accessibilityRole="header"
             >
                 {post.title}
             </Text>
@@ -65,6 +71,8 @@ export const PostCard: React.FC<PostCardProps> = (
             <Text
                 style={styles.body}
                 testID={`${testID}-body`}
+                accessible={true}
+                accessibilityRole="text"
             >
                 {getTruncatedBody(post.body)}
             </Text>
@@ -73,12 +81,16 @@ export const PostCard: React.FC<PostCardProps> = (
                 <Text
                     style={styles.authorLabel}
                     testID={`${testID}-author-label`}
+                    accessible={false}
                 >
                     By{' '}
                 </Text>
                 <Text
                     style={styles.authorName}
                     testID={`${testID}-author-name`}
+                    accessible={true}
+                    accessibilityRole="text"
+                    accessibilityLabel={`Author: ${post.authorName}`}
                 >
                     {post.authorName}
                 </Text>

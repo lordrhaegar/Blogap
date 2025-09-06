@@ -1,5 +1,5 @@
 /**
- * @fileoverview App Homescreen component that displaying a list of blog posts using Flatlist.
+ * @fileoverview App Homescreen component that display a list of blog posts using Flatlist.
  * Allows users to pull to refresh list, handles loading state and error during fetch.
  * @module screens/PostListScreen
  */
@@ -92,6 +92,10 @@ export const PostListScreen: React.FC = () => {
               testID="refresh-control"
             />
           }
+          accessible={true}
+          accessibilityRole="list"
+          accessibilityLabel="Blog posts list"
+          accessibilityHint="Swipe up and down to browse posts, pull down to refresh"
         />
       </View>
     </SafeAreaView>
